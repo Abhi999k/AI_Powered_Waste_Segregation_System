@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 
-model = tf.keras.models.load_model("beta_model_v1.keras")
+model = tf.keras.models.load_model("classification_model_beta.keras")
 class_names = ["Metal", "Organic", "Paper", "Plastic", "glass"]
 
 st.set_page_config(page_title="Waste Classification", page_icon="♻️")

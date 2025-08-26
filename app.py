@@ -13,7 +13,6 @@ if uploaded_file is not None:
     image_bytes = uploaded_file.read()
     image_array = np.frombuffer(image_bytes, np.uint8)
     image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
-
     max_dim, min_dim = 800, 400
     height, width = image.shape[:2]
     if height > max_dim or width > max_dim or height < min_dim or width < min_dim:

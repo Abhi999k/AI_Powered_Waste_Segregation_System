@@ -1,0 +1,8 @@
+streamlit
+opencv-python-headless
+tensorflow
+numpy
+pandas
+opencv-python
+Pillow
+ultralytics

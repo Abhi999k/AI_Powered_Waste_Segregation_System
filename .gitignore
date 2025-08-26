@@ -9,9 +9,9 @@ env/
 .venv/
 .env/
 
-# Dataset folders (change 'dataset_folder/' to your dataset folder name)
-dataset/
-Raw_dataset_v1/
+# Dataset folders
+Classification dataset/
+detection dataset/
 
 # IDE/editor specific files
 .vscode/

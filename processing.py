@@ -5,8 +5,8 @@ import cv2
 from ultralytics import YOLO
 
 def load_models():
-    detector = YOLO("models\detection_model.pt")
-    classifier = tf.keras.models.load_model("models\classification_model_beta.keras")
+    detector = YOLO("models/detection_model.pt")
+    classifier = tf.keras.models.load_model("models/classification_model_beta.keras")
     class_names = ["Metal", "Organic", "Paper", "Plastic", "glass"]
     return detector, classifier, class_names
 

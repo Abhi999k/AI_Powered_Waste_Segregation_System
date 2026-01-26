@@ -2,19 +2,20 @@ import streamlit as st
 import cv2
 import numpy as np
 import pandas as pd
-from processing import process_image, load_models
-
-detector, classifier, class_names = load_models()
+from processing import process_image, load_detector, load_classifier, class_names
 
 st.title("♻ Waste Detection & Classification")
 
 uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+
 if uploaded_file is not None:
     image_bytes = uploaded_file.read()
     image_array = np.frombuffer(image_bytes, np.uint8)
     image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+
     max_dim, min_dim = 800, 400
     height, width = image.shape[:2]
+
     if height > max_dim or width > max_dim or height < min_dim or width < min_dim:
         if height > width:
             new_height = min(max(height, min_dim), max_dim)
@@ -26,14 +27,17 @@ if uploaded_file is not None:
 
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
+    detector = load_detector()
+    classifier = load_classifier()
+
     col1, col2 = st.columns([6, 6])
     with col1:
-        st.image(image_rgb, caption="Uploaded Image", use_container_width=True)
+        st.image(image_rgb, caption="Uploaded Image", width="stretch")
 
-    image_with_boxes, total_objects, class_stats = process_image(image_rgb, detector, classifier, class_names)
+    image_with_boxes, total_objects, class_stats = process_image(image_rgb, detector, classifier)
 
     with col2:
-        st.image(image_with_boxes, caption="Analysis Results", use_container_width=True)
+        st.image(image_with_boxes, caption="Analysis Results", width="stretch")
 
     st.subheader(f"Found {total_objects} waste object{'s' if total_objects > 1 else ''}")
 
